@@ -1,0 +1,10 @@
+EXE_INC = \
+    -I../incompressibleTwoPhaseInteractingMixture \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/physicalProperties/lnInclude \
+    -I$(LIB_SRC)/twoPhaseModels/twoPhaseMixture/lnInclude
+
+LIB_LIBS = \
+    -ltwoPhaseMixture \
+    -lphysicalProperties \
+    -lfiniteVolume

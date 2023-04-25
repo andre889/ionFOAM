@@ -1,0 +1,2 @@
+vtkPVFoamReader : vtkMultiBlockDataSetAlgorithm ; vtkPVFoamReader.h ; PVFoamReader_SM
+vtkPVFoamReader::Superclass = vtkMultiBlockDataSetAlgorithm ; vtkPVFoamReader.h ; PVFoamReader_SM

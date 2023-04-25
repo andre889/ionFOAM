@@ -1,0 +1,10 @@
+../classes/specie/specie.C
+../classes/myTimeSchemes/myddtScheme.C
+../classes/myTimeSchemes/myBEuler.C
+../classes/myTimeSchemes/stepSizeController/timeStepController.C
+../classes/myTimeSchemes/stepSizeController/PPIDStepController.C
+../classes/myTimeSchemes/SDIRKMethods.C
+../classes/myTimeSchemes/embededMethods/SDIRKs3o3e2.C
+ionFoam.C
+
+EXE = $(FOAM_APPBIN)/ionFoam

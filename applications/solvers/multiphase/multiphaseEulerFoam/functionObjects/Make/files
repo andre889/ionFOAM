@@ -1,0 +1,6 @@
+moments/moments.C
+sizeDistribution/sizeDistribution.C
+phaseForces/phaseForces.C
+phaseMap/phaseMap.C
+
+LIB = $(FOAM_LIBBIN)/libmultiphaseEulerFoamFunctionObjects

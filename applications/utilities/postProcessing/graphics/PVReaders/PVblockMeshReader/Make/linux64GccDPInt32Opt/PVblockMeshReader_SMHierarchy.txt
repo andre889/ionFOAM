@@ -1,0 +1,2 @@
+vtkPVblockMeshReader : vtkMultiBlockDataSetAlgorithm ; vtkPVblockMeshReader.h ; PVblockMeshReader_SM
+vtkPVblockMeshReader::Superclass = vtkMultiBlockDataSetAlgorithm ; vtkPVblockMeshReader.h ; PVblockMeshReader_SM

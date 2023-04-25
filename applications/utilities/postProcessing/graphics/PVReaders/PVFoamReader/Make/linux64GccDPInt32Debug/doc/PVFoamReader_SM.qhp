@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>PVFoamReader_SM.org</namespace>
+    <virtualFolder>PVFoamReader_SM</virtualFolder>
+    <filterSection>
+        <toc> <section title="PVFoamReader_SM" ref="" >
+  </section> </toc>
+        <keywords>
+          <!-- how to handle keywords? -->
+        </keywords>
+        <files>
+          
+        </files>
+    </filterSection>
+</QtHelpProject>
