@@ -18,7 +18,6 @@ volScalarField epsilon(
 epsilon = epsilon*liquid.epsilon.value()*(1.0-alpha) + epsilon*membrane.epsilon.value()*(alpha);
 
 
-//electroStatic poissonFields(z,epsilon,mesh);
 volScalarField q(
     IOobject(
         "q",

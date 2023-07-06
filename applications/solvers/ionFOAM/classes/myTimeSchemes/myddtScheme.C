@@ -1,14 +1,22 @@
-#include "myddtScheme.H"
-//fk
+//***********************************************
+//  Date:  05/05/2023
+//  Revision: 1.0
+//  Author: Austin J. Andrews
+//  Email: andre889@umn.edu
+//  Affiliation: University of Minnesota Twin Cities, Department of Mechanical Engineering, Hogan Lab
 
+//  Description: See myddtScheme.H
+// **********************************************
+
+#include "myddtScheme.H"
 
 namespace Foam
 {
-    //Set upsSelection table, but do not include
-    //aerosolDistribution as a selection.
+    //Set upsSelection table, but do not include myddtScheme as a selection.
       defineTypeNameAndDebug(myddtScheme, 0);
       defineRunTimeSelectionTable(myddtScheme, Normal);      
 
+//Constructor for all myddtSchemes
 myddtScheme::myddtScheme
     (
         const fvMesh& mesh,
@@ -17,12 +25,9 @@ myddtScheme::myddtScheme
     :
     mesh_(mesh),
     dict_(dict)
-    {
-        //Constructor for all aerosolDistributions
-        
-    }
+    {}
        
-             
+//Create a new ddt scheme from a list of implemented schemes.
 autoPtr<myddtScheme> myddtScheme::New(
         const fvMesh& mesh,
         const dictionary& dict

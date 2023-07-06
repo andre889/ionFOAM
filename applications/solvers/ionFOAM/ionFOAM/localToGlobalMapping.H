@@ -13,7 +13,6 @@
 
                 //If not -1, then boundary exists in global mesh. 
                 //Otherwise, fluid boundary data needs to be mapped to internal faces of phiGlobal.
-                //Info << "start index " << startIndex << " size " << sizeOfPatch << " for bc " << fluidBoundaryi << endl;
                 if(boundaryRegionAddressList[fluidBoundaryi] > -1)
                 {
                        fvsPatchScalarField& bcGlobali = phiGlobal.boundaryFieldRef()[boundaryRegionAddressList[fluidBoundaryi]];
@@ -23,7 +22,6 @@
                             label localPatchFacei = fluidFacei-startIndex;
                             label globalFacei = faceAddressList[fluidFacei]; // need to determine sign before flip!
 
-                            //Info << "fluid face " << fluidFacei << " global face " << globalFacei << endl;
                             globalFacei = globalFacei >= 0 ? globalFacei - 1: -1*globalFacei -1;
                             label globalPatchFacei = globalFacei - bcGlobali.patch().start();
                             bcGlobali[globalPatchFacei] = bci[localPatchFacei];
@@ -38,7 +36,6 @@
                             label localPatchFacei = fluidFacei-startIndex;
                             label globalFacei = faceAddressList[fluidFacei]; // need to determine sign before flip!
 
-                            //Info << "fluid face " << fluidFacei << " global face " << globalFacei << endl;
                             globalFacei = globalFacei >= 0 ? globalFacei - 1: -1*globalFacei -1;
                             phiGlobal[globalFacei] = bci[localPatchFacei];
                         }

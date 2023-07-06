@@ -1,11 +1,5 @@
-
-//************************************************
-// STEP 4 Predict C*
-//************************************************
         forAll(Ci,i)
         {
-            //correct diffusion coeff inside the membrane regions 
-            //D should be harmic mean?? pankart
             volScalarField& ci = Ci[i].s();
             ci.storePrevIter();
             volScalarField Dfield(
@@ -24,7 +18,7 @@
             fvc::interpolate(Dfield, mesh.interpolationScheme("interp(D)"))
             : 0.0*fvc::interpolate(Dfield, mesh.interpolationScheme("interp(D)"));
 
-            surfaceScalarField theta = chemcialPotential ?
+            surfaceScalarField theta = chemicalPotential ?
             (Dsurface * (1.0 - Ci[i].K)) / (fvc::interpolate(alpha) + (1.0 - fvc::interpolate(alpha)) * Ci[i].K) * fvc::snGrad(alpha) * mesh.magSf()
             : 0.0*(Dsurface * (1.0 - Ci[i].K)) / (fvc::interpolate(alpha) + (1.0 - fvc::interpolate(alpha)) * Ci[i].K) * fvc::snGrad(alpha) * mesh.magSf();
 
@@ -45,14 +39,10 @@
 
                 if(nppPISO.predictorElectric())
                 {
-                    //scalar cEqnRelax = readScalar(piso.dict().lookup("cEqnRelax"));
-                    //cEqn.relax(cEqnRelax);
                     nppPISO.storeErrorElectirc(cEqn.solve(mesh.solverDict("C")).initialResidual());
                 }
                 else
                 {
-                    //solverPerformance::debug = 0;
-                    //Use GS solver for some reason jacobi or C = HbyA doesnt work...Stability 10/13/20 AJA
                     scalar cEqnRelax = readScalar(piso.dict().lookup("cEqnRelax"));
                     cEqn.relax(cEqnRelax);
                     nppPISO.storeErrorElectirc(cEqn.solve(mesh.solverDict("Ccorr")).initialResidual());
@@ -60,8 +50,7 @@
                     Ci[i].s().relax(ciRelax);
                 }
 
-                    Ci[i].s().correctBoundaryConditions(); //maybe?
-                  
+                    Ci[i].s().correctBoundaryConditions(); 
         }
 
     

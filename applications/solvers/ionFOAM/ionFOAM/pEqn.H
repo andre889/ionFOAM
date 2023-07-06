@@ -12,33 +12,28 @@ if (solveFluid)
         numCounts++;
 
         volScalarField rAU(1.0 / UEqn.A());
-        volVectorField HbyA(constrainHbyA(rAU * (UEqn.H() + Fe), U, p)); //Makes HbyA consistant with BCs.... should include FebyA?
-        //+ fvc::interpolate(rAU)*fvc::ddtCorr(U, phi) //is this RHS? Not needeD? https://www.sciencedirect.com/science/article/abs/pii/S0045793014000334?via%3Dihub 
+        volVectorField HbyA(constrainHbyA(rAU * (UEqn.H() + Fe), U, p)); //+ fvc::interpolate(rAU)*fvc::ddtCorr(U, phi)  not needed https://www.sciencedirect.com/science/article/abs/pii/S0045793014000334?via%3Dihub 
         surfaceScalarField phiHbyA(
             "phiHbyA",
             fvc::flux(HbyA) //+ fvc::interpolate(rAU)*fvc::ddtCorr(U, phi)
         );
         MRF.makeRelative(phiHbyA);
 
-        adjustPhi(phiHbyA, U, p); //hmm some kind of incompressible correction?
-        //Add RHS contributions
-
-        //surfaceScalarField phiHbyAPlusFe = FebyA+phiHbyA;
+        adjustPhi(phiHbyA, U, p);
+       
 
         // Update the pressure BCs to ensure flux consistency
         constrainPressure(p, U, phiHbyA, rAU, MRF);
-        //\nabla P = (\phi_hbya - \phi)a_s/Area;
 
         // Non-orthogonal pressure corrector loop
         label nccEND = readLabel(piso.dict().lookup("nNonOrthogonalCorrectors"));
-        for (label ncc = 0; ncc < nccEND; ncc++) //while (piso.correctNonOrthogonal())
+        for (label ncc = 0; ncc < nccEND; ncc++) 
         {
             // Pressure corrector
-
             fvScalarMatrix pEqn(
                 fvm::laplacian(rAU, p) == fvc::div(phiHbyA));
 
-            pEqn.setReference(pRefCell, pRefValue); //p.select(piso.finalInnerIter())
+            pEqn.setReference(pRefCell, pRefValue); 
             scalar error = pEqn.solve(mesh.solverDict("p")).initialResidual();
             nppPISO.storeError(error);
 
@@ -46,16 +41,13 @@ if (solveFluid)
             {
                 Info << "phi correction\n";
                 currentError = error;
-                //By haveing phiHbyA on face Rhie and Chow correction is satisifed!
+                //By having phiHbyA on faces Rhie and Chow correction is satisifed. This is consistant with the general PISO algorithm provided by OpenFOAM's pisoFOAM.
                 phi = phiHbyA - pEqn.flux();
             }
         }
 
-        //p.relax();
-        
-        //U = (rAU+rDIAGUT)*(A*phi - fvc::grad(p) + sourceDUDT); //rhie chow time correction?
-        U = HbyA - rAU * fvc::grad(p); //Dont think the extra term is needed as Fe is in source term in Ueqn.
-        U.correctBoundaryConditions();
-        p.correctBoundaryConditions();
+            U = HbyA - rAU * fvc::grad(p);
+            U.correctBoundaryConditions();
+            p.correctBoundaryConditions();
         }
 }

@@ -1,10 +1,17 @@
 SOURCE += ../classes/specie/specie.C
 SOURCE += ../classes/myTimeSchemes/myddtScheme.C
-SOURCE += ../classes/myTimeSchemes/myBEuler.C
-SOURCE += ../classes/myTimeSchemes/stepSizeController/timeStepController.C
-SOURCE += ../classes/myTimeSchemes/stepSizeController/PPIDStepController.C
-SOURCE += ../classes/myTimeSchemes/SDIRKMethods.C
-SOURCE += ../classes/myTimeSchemes/embededMethods/SDIRKs3o3e2.C
+SOURCE += ../classes/myTimeSchemes/schemes/mySteadyState.C
+SOURCE += ../classes/myTimeSchemes/schemes/myBEuler.C
+SOURCE += ../classes/myTimeSchemes/schemes/myBEuler2.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/timeStepController.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/IStepController.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/constController.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/PCStepController.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/PPIDStepController.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/H330.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/H312.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/SDIRKMethods.C
+SOURCE += ../classes/myTimeSchemes/SDIRKMethods/schemes/SDIRKs3o3e2.C
 SOURCE += ionFoam.C
 
 EXE = $(FOAM_APPBIN)/ionFoam

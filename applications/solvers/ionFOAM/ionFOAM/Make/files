@@ -1,10 +1,17 @@
 ../classes/specie/specie.C
 ../classes/myTimeSchemes/myddtScheme.C
-../classes/myTimeSchemes/myBEuler.C
-../classes/myTimeSchemes/stepSizeController/timeStepController.C
-../classes/myTimeSchemes/stepSizeController/PPIDStepController.C
-../classes/myTimeSchemes/SDIRKMethods.C
-../classes/myTimeSchemes/embededMethods/SDIRKs3o3e2.C
+../classes/myTimeSchemes/schemes/mySteadyState.C
+../classes/myTimeSchemes/schemes/myBEuler.C
+../classes/myTimeSchemes/schemes/myBEuler2.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/timeStepController.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/IStepController.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/constController.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/PCStepController.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/PPIDStepController.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/H330.C
+../classes/myTimeSchemes/SDIRKMethods/stepSizeController/controllers/H312.C
+../classes/myTimeSchemes/SDIRKMethods/SDIRKMethods.C
+../classes/myTimeSchemes/SDIRKMethods/schemes/SDIRKs3o3e2.C
 ionFoam.C
 
 EXE = $(FOAM_APPBIN)/ionFoam
