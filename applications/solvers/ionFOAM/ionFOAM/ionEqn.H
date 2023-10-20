@@ -22,10 +22,11 @@
             (Dsurface * (1.0 - Ci[i].K)) / (fvc::interpolate(alpha) + (1.0 - fvc::interpolate(alpha)) * Ci[i].K) * fvc::snGrad(alpha) * mesh.magSf()
             : 0.0*(Dsurface * (1.0 - Ci[i].K)) / (fvc::interpolate(alpha) + (1.0 - fvc::interpolate(alpha)) * Ci[i].K) * fvc::snGrad(alpha) * mesh.magSf();
 
+//Changed from (a) fvc::interpolate(E) & mesh.Sf() to (b) -fvc::snGrad(voltage)* mesh.magSf() on 08/06/2023 by Austin Andrews. For meshes with non-orthogonal and skewed cells, (a) produced numerical artifacts.
+
             surfaceScalarField eFlux = electroPhoretic ? 
-            Ci[i].z * constant::physicoChemical::F* fvc::interpolate(Dfield, mesh.interpolationScheme("interp(D)")) * (linearInterpolate(E) & mesh.Sf())/constant::physicoChemical::R/T 
-            : 0.0* constant::physicoChemical::F* fvc::interpolate(Dfield, mesh.interpolationScheme("interp(D)")) * (linearInterpolate(E) & mesh.Sf())/constant::physicoChemical::R/T; 
-         
+            Ci[i].z * constant::physicoChemical::F* fvc::interpolate(Dfield, mesh.interpolationScheme("interp(D)")) * (-fvc::snGrad(voltage)* mesh.magSf())/constant::physicoChemical::R/T 
+            : 0.0* constant::physicoChemical::F* fvc::interpolate(Dfield, mesh.interpolationScheme("interp(D)")) * (-fvc::snGrad(voltage)* mesh.magSf())/constant::physicoChemical::R/T;          
 
                 fvScalarMatrix cEqn
                 (
